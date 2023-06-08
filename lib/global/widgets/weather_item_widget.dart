@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:wealther_app/domain/entities/weather/hour.dart';
+import 'package:wealther_app/global/helper/function_helper.dart';
 
-Widget weatherItemWidget(BuildContext context) {
+Widget weatherItemWidget(BuildContext context, Hour hourData) {
   return Column(
     children: [
       Card(
@@ -12,20 +14,19 @@ Widget weatherItemWidget(BuildContext context) {
               const SizedBox(
                 height: 20,
               ),
-              const Text('10AM'),
+              Text(FunctionsHelper.convertDateFormat(hourData.time!)),
               const SizedBox(
                 height: 10,
               ),
               SizedBox(
                 height: 40,
                 width: 40,
-                child: Image.network(
-                    'https://cdn.weatherapi.com/weather/64x64/night/116.png'),
+                child: Image.network('https:${hourData.condition!.icon!}'),
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Text('26°C'),
+              Text('${hourData.tempC!.toInt()}°C'),
               const SizedBox(
                 height: 8,
               ),

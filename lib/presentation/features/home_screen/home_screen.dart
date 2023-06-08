@@ -5,17 +5,23 @@ import 'package:wealther_app/global/helper/function_helper.dart';
 import 'package:wealther_app/injection/injector.dart';
 import 'package:wealther_app/presentation/bloc/weather/weather_forecast_cubit.dart';
 import '../../../global/global_exports.dart';
-import 'package:intl/intl.dart';
 
-class HomePageScreen extends StatelessWidget {
+class HomePageScreen extends StatefulWidget {
   HomePageScreen({super.key});
+
+  @override
+  State<HomePageScreen> createState() => _HomePageScreenState();
+}
+
+class _HomePageScreenState extends State<HomePageScreen> {
   final WeatherForecastCubit _weatherForecastCubit =
       injector.get<WeatherForecastCubit>();
+  var selectedDay = 0;
   @override
   Widget build(BuildContext context) {
     var fullWidth = displayWidth(context);
     var fullHeight = displayHeight(context);
-    dynamic cityResult = '';
+
     return BlocConsumer<WeatherForecastCubit, WeatherForecastState>(
         bloc: _weatherForecastCubit,
         listener: (BuildContext context, WeatherForecastState state) {
@@ -39,13 +45,28 @@ class HomePageScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: 8.0, vertical: 100),
-                          child: Text(
-                            'Good Morning!',
-                            style:
-                                TextStyle(fontSize: 40, color: Colors.black54),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Good Morning!',
+                                style: TextStyle(
+                                    fontSize: 40, color: Colors.black54),
+                              ),
+                              Container(
+                                  width: 50,
+                                  height: 50,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.7),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Icon(
+                                    Icons.bookmark,
+                                    color: Colors.black.withOpacity(0.7),
+                                  ))
+                            ],
                           ),
                         ),
                         Container(
@@ -69,7 +90,7 @@ class HomePageScreen extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10.0),
                                     child: Text(
-                                      state.appEntity!.entity == null
+                                      state.appEntity == null
                                           ? '0°C'
                                           : '${state.appEntity!.entity!.current!.tempC!.toInt()}°C',
                                       style: const TextStyle(
@@ -83,7 +104,7 @@ class HomePageScreen extends StatelessWidget {
                                       children: [
                                         const Icon(Icons.location_on),
                                         Text(
-                                          state.appEntity!.entity == null
+                                          state.appEntity == null
                                               ? ''
                                               : '${state.appEntity!.entity!.location!.name}',
                                           style: const TextStyle(
@@ -99,7 +120,7 @@ class HomePageScreen extends StatelessWidget {
                                 height: 10,
                               ),
                               SizedBox(
-                                child: state.appEntity!.entity == null
+                                child: state.appEntity == null
                                     ? const SizedBox(
                                         height: 65,
                                       )
@@ -126,7 +147,7 @@ class HomePageScreen extends StatelessWidget {
                                             padding: EdgeInsets.symmetric(
                                                 horizontal: 8.0),
                                             child: Text(
-                                              state.appEntity!.entity == null
+                                              state.appEntity == null
                                                   ? ''
                                                   : FunctionsHelper
                                                       .convertDateFormat(
@@ -164,12 +185,19 @@ class HomePageScreen extends StatelessWidget {
                                   scrollDirection: Axis.horizontal,
                                   itemCount: FunctionsHelper.dayList().length,
                                   itemBuilder: (context, index) {
-                                    return dayItemWidget(
-                                        context,
-                                        FunctionsHelper.dayList()[index]
-                                            .dayName,
-                                        FunctionsHelper.dayList()[index]
-                                            .selected);
+                                    return InkWell(
+                                      onTap: () {
+                                        print("Hello Index $index");
+                                        setState(() {
+                                          selectedDay = index;
+                                        });
+                                      },
+                                      child: dayItemWidget(
+                                          context,
+                                          FunctionsHelper.dayList()[index]
+                                              .dayName,
+                                          selectedDay == index ? true : false),
+                                    );
                                   }),
                             ),
                             const SizedBox(
@@ -183,8 +211,18 @@ class HomePageScreen extends StatelessWidget {
                                   shrinkWrap: true,
                                   itemCount: 24,
                                   itemBuilder: (context, index) {
-                                    return InkWell(
-                                        child: weatherItemWidget(context));
+                                    var hourData = state
+                                        .appEntity!
+                                        .entity!
+                                        .forecast!
+                                        .forecastday![selectedDay]
+                                        .hour!;
+                                    return FunctionsHelper.hourDifference(
+                                                "${hourData[index].time}") >=
+                                            0
+                                        ? weatherItemWidget(
+                                            context, hourData[index])
+                                        : Container();
                                   }),
                             ),
                           ],

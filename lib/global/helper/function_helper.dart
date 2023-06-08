@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:intl/intl.dart';
 import 'package:wealther_app/global/models/day_model.dart';
 
@@ -7,6 +9,15 @@ class FunctionsHelper {
 
     String time = DateFormat('h:mm a').format(dateTime);
     return time;
+  }
+
+  static int hourDifference(String hourData) {
+    DateTime now = DateTime.now();
+
+    DateTime dateTime = DateFormat('yyyy-MM-dd HH:mm').parse(hourData);
+    Duration duration = dateTime.difference(now);
+    int hourDifference = duration.inHours;
+    return hourDifference;
   }
 
   static List<DayModel> dayList() {

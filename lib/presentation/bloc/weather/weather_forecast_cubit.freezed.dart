@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$WeatherForecastState {
   AppEntity<WeatherModel>? get appEntity => throw _privateConstructorUsedError;
+  int? get selectedIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $WeatherForecastStateCopyWith<WeatherForecastState> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $WeatherForecastStateCopyWith<$Res> {
           $Res Function(WeatherForecastState) then) =
       _$WeatherForecastStateCopyWithImpl<$Res, WeatherForecastState>;
   @useResult
-  $Res call({AppEntity<WeatherModel>? appEntity});
+  $Res call({AppEntity<WeatherModel>? appEntity, int? selectedIndex});
 
   $AppEntityCopyWith<WeatherModel, $Res>? get appEntity;
 }
@@ -49,12 +50,17 @@ class _$WeatherForecastStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? appEntity = freezed,
+    Object? selectedIndex = freezed,
   }) {
     return _then(_value.copyWith(
       appEntity: freezed == appEntity
           ? _value.appEntity
           : appEntity // ignore: cast_nullable_to_non_nullable
               as AppEntity<WeatherModel>?,
+      selectedIndex: freezed == selectedIndex
+          ? _value.selectedIndex
+          : selectedIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 
@@ -79,7 +85,7 @@ abstract class _$$_WeatherForecastStateCopyWith<$Res>
       __$$_WeatherForecastStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AppEntity<WeatherModel>? appEntity});
+  $Res call({AppEntity<WeatherModel>? appEntity, int? selectedIndex});
 
   @override
   $AppEntityCopyWith<WeatherModel, $Res>? get appEntity;
@@ -97,12 +103,17 @@ class __$$_WeatherForecastStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? appEntity = freezed,
+    Object? selectedIndex = freezed,
   }) {
     return _then(_$_WeatherForecastState(
       appEntity: freezed == appEntity
           ? _value.appEntity
           : appEntity // ignore: cast_nullable_to_non_nullable
               as AppEntity<WeatherModel>?,
+      selectedIndex: freezed == selectedIndex
+          ? _value.selectedIndex
+          : selectedIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -110,14 +121,16 @@ class __$$_WeatherForecastStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_WeatherForecastState implements _WeatherForecastState {
-  _$_WeatherForecastState({this.appEntity});
+  _$_WeatherForecastState({this.appEntity, this.selectedIndex});
 
   @override
   final AppEntity<WeatherModel>? appEntity;
+  @override
+  final int? selectedIndex;
 
   @override
   String toString() {
-    return 'WeatherForecastState(appEntity: $appEntity)';
+    return 'WeatherForecastState(appEntity: $appEntity, selectedIndex: $selectedIndex)';
   }
 
   @override
@@ -126,11 +139,13 @@ class _$_WeatherForecastState implements _WeatherForecastState {
         (other.runtimeType == runtimeType &&
             other is _$_WeatherForecastState &&
             (identical(other.appEntity, appEntity) ||
-                other.appEntity == appEntity));
+                other.appEntity == appEntity) &&
+            (identical(other.selectedIndex, selectedIndex) ||
+                other.selectedIndex == selectedIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, appEntity);
+  int get hashCode => Object.hash(runtimeType, appEntity, selectedIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -141,11 +156,14 @@ class _$_WeatherForecastState implements _WeatherForecastState {
 }
 
 abstract class _WeatherForecastState implements WeatherForecastState {
-  factory _WeatherForecastState({final AppEntity<WeatherModel>? appEntity}) =
-      _$_WeatherForecastState;
+  factory _WeatherForecastState(
+      {final AppEntity<WeatherModel>? appEntity,
+      final int? selectedIndex}) = _$_WeatherForecastState;
 
   @override
   AppEntity<WeatherModel>? get appEntity;
+  @override
+  int? get selectedIndex;
   @override
   @JsonKey(ignore: true)
   _$$_WeatherForecastStateCopyWith<_$_WeatherForecastState> get copyWith =>
