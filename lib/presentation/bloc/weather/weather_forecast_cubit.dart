@@ -18,8 +18,13 @@ class WeatherForecastCubit extends Cubit<WeatherForecastState> {
   Future<void> fetchWeatherData(String city) async {
     final AppEntity<WeatherModel> weatherData =
         await _weatherForecastUseCase(city);
+
     emit(state.copyWith(
       appEntity: weatherData,
     ));
+  }
+
+  Future<void> setSelectedIndex(int index) async {
+    emit(state.copyWith(selectedIndex: index));
   }
 }

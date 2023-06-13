@@ -6,7 +6,7 @@ import '../../injection/injector.dart';
 import '../../presentation/bloc/weather/weather_forecast_cubit.dart';
 
 Widget autoCompleteTextField(BuildContext context) {
-  final WeatherForecastCubit _weatherForecastCubit =
+  final WeatherForecastCubit weatherForecastCubit =
       injector.get<WeatherForecastCubit>();
   return Autocomplete(
     optionsBuilder: (TextEditingValue textEditingValue) {
@@ -63,7 +63,7 @@ Widget autoCompleteTextField(BuildContext context) {
       );
     },
     onSelected: (String selection) {
-      _weatherForecastCubit.fetchWeatherData(selection);
+      weatherForecastCubit.fetchWeatherData(selection);
     },
   );
 }

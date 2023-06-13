@@ -4,7 +4,8 @@ import 'package:wealther_app/domain/entities/weather/condition_model.dart';
 part 'hour.freezed.dart';
 part 'hour.g.dart';
 
-@Freezed(toJson: false)
+@JsonSerializable(createFactory: false)
+@Freezed()
 class Hour with _$Hour {
   factory Hour(
       {@JsonKey(name: 'time') String? time,
@@ -16,4 +17,6 @@ class Hour with _$Hour {
       @JsonKey(name: 'chance_of_rain') int? chanceOfRain}) = _Hour;
 
   factory Hour.fromJson(Map<String, dynamic> json) => _$HourFromJson(json);
+
+  Map<String, dynamic> toJson() => _$HourToJson(this);
 }

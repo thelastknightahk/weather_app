@@ -35,7 +35,7 @@ class _ApiClient implements ApiClient {
     )
             .compose(
               _dio.options,
-              '/forecast.json?key=ed5eb4ea380148dfba324608232305&days=3',
+              '/forecast.json?key=c715f34559864ebf942174608230706&days=3',
               queryParameters: queryParameters,
               data: _data,
             )

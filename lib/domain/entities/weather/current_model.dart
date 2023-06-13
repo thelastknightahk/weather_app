@@ -4,7 +4,8 @@ import 'package:wealther_app/domain/entities/weather/condition_model.dart';
 part 'current_model.freezed.dart';
 part 'current_model.g.dart';
 
-@Freezed(toJson: false)
+@JsonSerializable(createFactory: false)
+@Freezed()
 class CurrentModel with _$CurrentModel {
   factory CurrentModel({
     @JsonKey(name: 'temp_c') double? tempC,
@@ -21,4 +22,6 @@ class CurrentModel with _$CurrentModel {
 
   factory CurrentModel.fromJson(Map<String, dynamic> json) =>
       _$CurrentModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CurrentModelToJson(this);
 }

@@ -4,7 +4,7 @@ part of 'weather_forecast_cubit.dart';
 class WeatherForecastState with _$WeatherForecastState {
   factory WeatherForecastState(
       {AppEntity<WeatherModel>? appEntity,
-      int? selectedIndex}) = _WeatherForecastState;
+      @Default(0) int? selectedIndex}) = _WeatherForecastState;
 
   factory WeatherForecastState.initial() => WeatherForecastState();
 }

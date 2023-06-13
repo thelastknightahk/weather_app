@@ -41,6 +41,7 @@ mixin _$CurrentModel {
   @JsonKey(name: 'feelslike_f')
   double? get feelslikeF => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $CurrentModelCopyWith<CurrentModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -240,7 +241,7 @@ class __$$_CurrentModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 class _$_CurrentModel implements _CurrentModel {
   _$_CurrentModel(
       {@JsonKey(name: 'temp_c') this.tempC,
@@ -326,6 +327,13 @@ class _$_CurrentModel implements _CurrentModel {
   @pragma('vm:prefer-inline')
   _$$_CurrentModelCopyWith<_$_CurrentModel> get copyWith =>
       __$$_CurrentModelCopyWithImpl<_$_CurrentModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CurrentModelToJson(
+      this,
+    );
+  }
 }
 
 abstract class _CurrentModel implements CurrentModel {

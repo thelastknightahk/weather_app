@@ -27,6 +27,7 @@ mixin _$WeatherModel {
   @JsonKey(name: 'forecast')
   ForecastModel? get forecast => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $WeatherModelCopyWith<WeatherModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -172,7 +173,7 @@ class __$$_WeatherModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 class _$_WeatherModel implements _WeatherModel {
   _$_WeatherModel(
       {@JsonKey(name: 'location') this.location,
@@ -218,6 +219,13 @@ class _$_WeatherModel implements _WeatherModel {
   @pragma('vm:prefer-inline')
   _$$_WeatherModelCopyWith<_$_WeatherModel> get copyWith =>
       __$$_WeatherModelCopyWithImpl<_$_WeatherModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_WeatherModelToJson(
+      this,
+    );
+  }
 }
 
 abstract class _WeatherModel implements WeatherModel {

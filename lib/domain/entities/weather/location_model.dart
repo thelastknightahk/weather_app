@@ -1,9 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 part 'location_model.freezed.dart';
 part 'location_model.g.dart';
 
-@Freezed(toJson: false)
+@JsonSerializable(createFactory: false)
+@freezed
 class LocationModel with _$LocationModel {
   factory LocationModel(
       {@JsonKey(name: 'name') String? name,
@@ -16,4 +16,5 @@ class LocationModel with _$LocationModel {
 
   factory LocationModel.fromJson(Map<String, dynamic> json) =>
       _$LocationModelFromJson(json);
+  Map<String, dynamic> toJson() => _$LocationModelToJson(this);
 }

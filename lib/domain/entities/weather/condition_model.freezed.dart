@@ -27,6 +27,7 @@ mixin _$ConditionModel {
   @JsonKey(name: 'code')
   int? get code => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ConditionModelCopyWith<ConditionModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -125,7 +126,7 @@ class __$$_ConditionModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 class _$_ConditionModel implements _ConditionModel {
   _$_ConditionModel(
       {@JsonKey(name: 'text') this.text,
@@ -169,6 +170,13 @@ class _$_ConditionModel implements _ConditionModel {
   @pragma('vm:prefer-inline')
   _$$_ConditionModelCopyWith<_$_ConditionModel> get copyWith =>
       __$$_ConditionModelCopyWithImpl<_$_ConditionModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ConditionModelToJson(
+      this,
+    );
+  }
 }
 
 abstract class _ConditionModel implements ConditionModel {

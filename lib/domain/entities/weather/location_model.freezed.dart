@@ -35,6 +35,7 @@ mixin _$LocationModel {
   @JsonKey(name: 'localtime')
   String? get localtime => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $LocationModelCopyWith<LocationModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -181,7 +182,7 @@ class __$$_LocationModelCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 class _$_LocationModel implements _LocationModel {
   _$_LocationModel(
       {@JsonKey(name: 'name') this.name,
@@ -247,6 +248,13 @@ class _$_LocationModel implements _LocationModel {
   @pragma('vm:prefer-inline')
   _$$_LocationModelCopyWith<_$_LocationModel> get copyWith =>
       __$$_LocationModelCopyWithImpl<_$_LocationModel>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_LocationModelToJson(
+      this,
+    );
+  }
 }
 
 abstract class _LocationModel implements LocationModel {

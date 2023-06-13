@@ -11,6 +11,23 @@ class FunctionsHelper {
     return time;
   }
 
+  static String timeGreeting() {
+    DateTime now = DateTime.now();
+    int currentHour = now.hour;
+
+    // Determine the appropriate greeting based on the current hour
+    String greeting;
+    if (currentHour < 12) {
+      greeting = 'Good Morning!';
+    } else if (currentHour < 18) {
+      greeting = 'Good Afternoon!';
+    } else {
+      greeting = 'Good Night!';
+    }
+
+    return greeting;
+  }
+
   static int hourDifference(String hourData) {
     DateTime now = DateTime.now();
 

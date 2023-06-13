@@ -4,6 +4,7 @@ import 'package:wealther_app/domain/entities/weather/hour.dart';
 part 'forecast_day.freezed.dart';
 part 'forecast_day.g.dart';
 
+@JsonSerializable(createFactory: false)
 @Freezed(toJson: false)
 class ForecastDay with _$ForecastDay {
   factory ForecastDay(

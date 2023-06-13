@@ -6,7 +6,8 @@ import 'package:wealther_app/domain/entities/weather/location_model.dart';
 part 'weather_model.freezed.dart';
 part 'weather_model.g.dart';
 
-@Freezed(toJson: false)
+@JsonSerializable(createFactory: false)
+@Freezed()
 class WeatherModel with _$WeatherModel {
   factory WeatherModel(
       {@JsonKey(name: 'location') LocationModel? location,
@@ -15,4 +16,6 @@ class WeatherModel with _$WeatherModel {
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) =>
       _$WeatherModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$WeatherModelToJson(this);
 }

@@ -35,6 +35,7 @@ mixin _$Hour {
   @JsonKey(name: 'chance_of_rain')
   int? get chanceOfRain => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $HourCopyWith<Hour> get copyWith => throw _privateConstructorUsedError;
 }
@@ -192,7 +193,7 @@ class __$$_HourCopyWithImpl<$Res> extends _$HourCopyWithImpl<$Res, _$_Hour>
 }
 
 /// @nodoc
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 class _$_Hour implements _Hour {
   _$_Hour(
       {@JsonKey(name: 'time') this.time,
@@ -259,6 +260,13 @@ class _$_Hour implements _Hour {
   @pragma('vm:prefer-inline')
   _$$_HourCopyWith<_$_Hour> get copyWith =>
       __$$_HourCopyWithImpl<_$_Hour>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_HourToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Hour implements Hour {

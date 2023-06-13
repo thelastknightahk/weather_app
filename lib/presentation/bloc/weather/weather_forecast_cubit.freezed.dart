@@ -121,11 +121,12 @@ class __$$_WeatherForecastStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_WeatherForecastState implements _WeatherForecastState {
-  _$_WeatherForecastState({this.appEntity, this.selectedIndex});
+  _$_WeatherForecastState({this.appEntity, this.selectedIndex = 0});
 
   @override
   final AppEntity<WeatherModel>? appEntity;
   @override
+  @JsonKey()
   final int? selectedIndex;
 
   @override

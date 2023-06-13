@@ -6,6 +6,12 @@ part of 'forecast_day.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+Map<String, dynamic> _$ForecastDayToJson(ForecastDay instance) =>
+    <String, dynamic>{
+      'date': instance.date,
+      'hour': instance.hour,
+    };
+
 _$_ForecastDay _$$_ForecastDayFromJson(Map<String, dynamic> json) =>
     _$_ForecastDay(
       date: json['date'] as String?,
