@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:wealther_app/global/helper/function_helper.dart';
 import 'package:wealther_app/injection/injector.dart';
 import 'package:wealther_app/presentation/bloc/weather/weather_forecast_cubit.dart';
@@ -55,12 +56,7 @@ class HomePageScreen extends StatelessWidget {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const DetailScreen(),
-                                        ),
-                                      );
+                                      context.go('/offline');
                                     },
                                     child: Container(
                                         width: 40,
@@ -78,17 +74,23 @@ class HomePageScreen extends StatelessWidget {
                                   const SizedBox(
                                     width: 20,
                                   ),
-                                  Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white.withOpacity(0.7),
-                                          borderRadius:
-                                              BorderRadius.circular(4)),
-                                      child: Icon(
-                                        Icons.admin_panel_settings_sharp,
-                                        color: Colors.black.withOpacity(0.7),
-                                      )),
+                                  InkWell(
+                                    onTap: () {
+                                      context.go('/admin');
+                                    },
+                                    child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.7),
+                                            borderRadius:
+                                                BorderRadius.circular(4)),
+                                        child: Icon(
+                                          Icons.admin_panel_settings_sharp,
+                                          color: Colors.black.withOpacity(0.7),
+                                        )),
+                                  ),
                                 ],
                               ),
                             ],
