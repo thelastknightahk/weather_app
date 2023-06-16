@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wealther_app/global/helper/function_helper.dart';
 import 'package:wealther_app/injection/injector.dart';
 import 'package:wealther_app/presentation/bloc/weather/weather_forecast_cubit.dart';
-import 'package:wealther_app/presentation/features/detail_screen/detail_screen.dart';
 import '../../../global/global_exports.dart';
+import '../detail_screen/detail_screen.dart';
 
 class HomePageScreen extends StatelessWidget {
   HomePageScreen({super.key});

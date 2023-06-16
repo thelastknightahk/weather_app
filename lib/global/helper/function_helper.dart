@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:intl/intl.dart';
+import 'package:wealther_app/domain/entities/user/city_offline.dart';
 import 'package:wealther_app/global/models/day_model.dart';
 
 class FunctionsHelper {
