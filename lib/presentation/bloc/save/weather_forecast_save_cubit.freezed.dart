@@ -20,7 +20,8 @@ mixin _$WeatherForecastSaveState {
       throw _privateConstructorUsedError;
   AppEntity<ForecastModel>? get cityDetailAppEntity =>
       throw _privateConstructorUsedError;
-  int? get saveSelectedIndex => throw _privateConstructorUsedError;
+  int? get saveSelectedDayIndex => throw _privateConstructorUsedError;
+  int? get saveSelectedCityIndex => throw _privateConstructorUsedError;
   bool? get saved => throw _privateConstructorUsedError;
   bool? get deleted => throw _privateConstructorUsedError;
 
@@ -38,7 +39,8 @@ abstract class $WeatherForecastSaveStateCopyWith<$Res> {
   $Res call(
       {AppEntity<List<CityOffline>>? cityListAppEntity,
       AppEntity<ForecastModel>? cityDetailAppEntity,
-      int? saveSelectedIndex,
+      int? saveSelectedDayIndex,
+      int? saveSelectedCityIndex,
       bool? saved,
       bool? deleted});
 
@@ -62,7 +64,8 @@ class _$WeatherForecastSaveStateCopyWithImpl<$Res,
   $Res call({
     Object? cityListAppEntity = freezed,
     Object? cityDetailAppEntity = freezed,
-    Object? saveSelectedIndex = freezed,
+    Object? saveSelectedDayIndex = freezed,
+    Object? saveSelectedCityIndex = freezed,
     Object? saved = freezed,
     Object? deleted = freezed,
   }) {
@@ -75,9 +78,13 @@ class _$WeatherForecastSaveStateCopyWithImpl<$Res,
           ? _value.cityDetailAppEntity
           : cityDetailAppEntity // ignore: cast_nullable_to_non_nullable
               as AppEntity<ForecastModel>?,
-      saveSelectedIndex: freezed == saveSelectedIndex
-          ? _value.saveSelectedIndex
-          : saveSelectedIndex // ignore: cast_nullable_to_non_nullable
+      saveSelectedDayIndex: freezed == saveSelectedDayIndex
+          ? _value.saveSelectedDayIndex
+          : saveSelectedDayIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      saveSelectedCityIndex: freezed == saveSelectedCityIndex
+          ? _value.saveSelectedCityIndex
+          : saveSelectedCityIndex // ignore: cast_nullable_to_non_nullable
               as int?,
       saved: freezed == saved
           ? _value.saved
@@ -129,7 +136,8 @@ abstract class _$$_WeatherForecastSaveStateCopyWith<$Res>
   $Res call(
       {AppEntity<List<CityOffline>>? cityListAppEntity,
       AppEntity<ForecastModel>? cityDetailAppEntity,
-      int? saveSelectedIndex,
+      int? saveSelectedDayIndex,
+      int? saveSelectedCityIndex,
       bool? saved,
       bool? deleted});
 
@@ -153,7 +161,8 @@ class __$$_WeatherForecastSaveStateCopyWithImpl<$Res>
   $Res call({
     Object? cityListAppEntity = freezed,
     Object? cityDetailAppEntity = freezed,
-    Object? saveSelectedIndex = freezed,
+    Object? saveSelectedDayIndex = freezed,
+    Object? saveSelectedCityIndex = freezed,
     Object? saved = freezed,
     Object? deleted = freezed,
   }) {
@@ -166,9 +175,13 @@ class __$$_WeatherForecastSaveStateCopyWithImpl<$Res>
           ? _value.cityDetailAppEntity
           : cityDetailAppEntity // ignore: cast_nullable_to_non_nullable
               as AppEntity<ForecastModel>?,
-      saveSelectedIndex: freezed == saveSelectedIndex
-          ? _value.saveSelectedIndex
-          : saveSelectedIndex // ignore: cast_nullable_to_non_nullable
+      saveSelectedDayIndex: freezed == saveSelectedDayIndex
+          ? _value.saveSelectedDayIndex
+          : saveSelectedDayIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      saveSelectedCityIndex: freezed == saveSelectedCityIndex
+          ? _value.saveSelectedCityIndex
+          : saveSelectedCityIndex // ignore: cast_nullable_to_non_nullable
               as int?,
       saved: freezed == saved
           ? _value.saved
@@ -188,7 +201,8 @@ class _$_WeatherForecastSaveState implements _WeatherForecastSaveState {
   _$_WeatherForecastSaveState(
       {this.cityListAppEntity,
       this.cityDetailAppEntity,
-      this.saveSelectedIndex = 0,
+      this.saveSelectedDayIndex = 0,
+      this.saveSelectedCityIndex = 0,
       this.saved,
       this.deleted});
 
@@ -198,7 +212,10 @@ class _$_WeatherForecastSaveState implements _WeatherForecastSaveState {
   final AppEntity<ForecastModel>? cityDetailAppEntity;
   @override
   @JsonKey()
-  final int? saveSelectedIndex;
+  final int? saveSelectedDayIndex;
+  @override
+  @JsonKey()
+  final int? saveSelectedCityIndex;
   @override
   final bool? saved;
   @override
@@ -206,7 +223,7 @@ class _$_WeatherForecastSaveState implements _WeatherForecastSaveState {
 
   @override
   String toString() {
-    return 'WeatherForecastSaveState(cityListAppEntity: $cityListAppEntity, cityDetailAppEntity: $cityDetailAppEntity, saveSelectedIndex: $saveSelectedIndex, saved: $saved, deleted: $deleted)';
+    return 'WeatherForecastSaveState(cityListAppEntity: $cityListAppEntity, cityDetailAppEntity: $cityDetailAppEntity, saveSelectedDayIndex: $saveSelectedDayIndex, saveSelectedCityIndex: $saveSelectedCityIndex, saved: $saved, deleted: $deleted)';
   }
 
   @override
@@ -218,15 +235,23 @@ class _$_WeatherForecastSaveState implements _WeatherForecastSaveState {
                 other.cityListAppEntity == cityListAppEntity) &&
             (identical(other.cityDetailAppEntity, cityDetailAppEntity) ||
                 other.cityDetailAppEntity == cityDetailAppEntity) &&
-            (identical(other.saveSelectedIndex, saveSelectedIndex) ||
-                other.saveSelectedIndex == saveSelectedIndex) &&
+            (identical(other.saveSelectedDayIndex, saveSelectedDayIndex) ||
+                other.saveSelectedDayIndex == saveSelectedDayIndex) &&
+            (identical(other.saveSelectedCityIndex, saveSelectedCityIndex) ||
+                other.saveSelectedCityIndex == saveSelectedCityIndex) &&
             (identical(other.saved, saved) || other.saved == saved) &&
             (identical(other.deleted, deleted) || other.deleted == deleted));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, cityListAppEntity,
-      cityDetailAppEntity, saveSelectedIndex, saved, deleted);
+  int get hashCode => Object.hash(
+      runtimeType,
+      cityListAppEntity,
+      cityDetailAppEntity,
+      saveSelectedDayIndex,
+      saveSelectedCityIndex,
+      saved,
+      deleted);
 
   @JsonKey(ignore: true)
   @override
@@ -240,7 +265,8 @@ abstract class _WeatherForecastSaveState implements WeatherForecastSaveState {
   factory _WeatherForecastSaveState(
       {final AppEntity<List<CityOffline>>? cityListAppEntity,
       final AppEntity<ForecastModel>? cityDetailAppEntity,
-      final int? saveSelectedIndex,
+      final int? saveSelectedDayIndex,
+      final int? saveSelectedCityIndex,
       final bool? saved,
       final bool? deleted}) = _$_WeatherForecastSaveState;
 
@@ -249,7 +275,9 @@ abstract class _WeatherForecastSaveState implements WeatherForecastSaveState {
   @override
   AppEntity<ForecastModel>? get cityDetailAppEntity;
   @override
-  int? get saveSelectedIndex;
+  int? get saveSelectedDayIndex;
+  @override
+  int? get saveSelectedCityIndex;
   @override
   bool? get saved;
   @override

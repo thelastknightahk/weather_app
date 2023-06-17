@@ -5,7 +5,8 @@ class WeatherForecastSaveState with _$WeatherForecastSaveState {
   factory WeatherForecastSaveState({
     AppEntity<List<CityOffline>>? cityListAppEntity,
     AppEntity<ForecastModel>? cityDetailAppEntity,
-    @Default(0) int? saveSelectedIndex,
+    @Default(0) int? saveSelectedDayIndex,
+    @Default(0) int? saveSelectedCityIndex,
     bool? saved,
     bool? deleted,
   }) = _WeatherForecastSaveState;

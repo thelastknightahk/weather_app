@@ -31,7 +31,7 @@ class FunctionsHelper {
 
   static int hourDifference(String hourData) {
     DateTime now = DateTime.now();
-
+    print("hOur ${now} ");
     DateTime dateTime = DateFormat('yyyy-MM-dd HH:mm').parse(hourData);
     Duration duration = dateTime.difference(now);
     int hourDifference = duration.inHours;

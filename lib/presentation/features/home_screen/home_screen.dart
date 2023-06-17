@@ -5,7 +5,6 @@ import 'package:wealther_app/global/helper/function_helper.dart';
 import 'package:wealther_app/injection/injector.dart';
 import 'package:wealther_app/presentation/bloc/weather/weather_forecast_cubit.dart';
 import '../../../global/global_exports.dart';
-import '../detail_screen/detail_screen.dart';
 
 class HomePageScreen extends StatelessWidget {
   HomePageScreen({super.key});
@@ -256,12 +255,8 @@ class HomePageScreen extends StatelessWidget {
                                             .forecast!
                                             .forecastday![state.selectedIndex!]
                                             .hour!;
-                                        return FunctionsHelper.hourDifference(
-                                                    "${hourData[index].time}") >=
-                                                0
-                                            ? weatherItemWidget(
-                                                context, hourData[index])
-                                            : Container();
+                                        return weatherItemWidget(
+                                            context, hourData[index]);
                                       }),
                                 ),
                               ],

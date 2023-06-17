@@ -41,13 +41,21 @@ class WeatherForecastSaveCubit extends Cubit<WeatherForecastSaveState> {
   Future<void> getCitiesList() async {
     final AppEntity<List<CityOffline>> cityListData =
         await _weatherGetCitiesUseCase();
-    print("Hello Data ");
     emit(state.copyWith(cityListAppEntity: cityListData));
   }
 
   Future<void> getCityDetailInfo(String cityName) async {
     final AppEntity<ForecastModel> cityDetailData =
         await _weatherGetCityUseCase(cityName);
+    print("call Data ${cityName}");
     emit(state.copyWith(cityDetailAppEntity: cityDetailData));
+  }
+
+  Future<void> setSelectedCityIndex(int cityIndex) async {
+    emit(state.copyWith(saveSelectedCityIndex: cityIndex));
+  }
+
+  Future<void> setSelectedDayIndex(int dayIndex) async {
+    emit(state.copyWith(saveSelectedDayIndex: dayIndex));
   }
 }
