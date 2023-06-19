@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1080400165198-6sp5tt3kn7castj0dh1fqhaegu1tttch.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1080400165198-6sp5tt3kn7castj0dh1fqhaegu1tttch</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1080400165198-fub7451h5oq9r5mabvvn5hn5l5vvbikv.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCL0wPr7vCDbBill-ZddQtx-iVBBbAClD0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1080400165198</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.wealtherApp</string>
+	<key>PROJECT_ID</key>
+	<string>videocall-65fc5</string>
+	<key>STORAGE_BUCKET</key>
+	<string>videocall-65fc5.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1080400165198:ios:d4feeb0e51f100a3fd461f</string>
+	<key>DATABASE_URL</key>
+	<string>https://videocall-65fc5.firebaseio.com</string>
+</dict>
+</plist>
