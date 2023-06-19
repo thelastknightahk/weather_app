@@ -30,14 +30,16 @@ class WeatherForecastSaveCubit extends Cubit<WeatherForecastSaveState> {
 
   Future<void> saveCityData(WeatherModel weatherModel) async {
     _weatherSaveCityUseCase(weatherModel);
-    emit(state.copyWith(saved: true));
+    emit(state.copyWith(saved: true, fetchSavedData: false));
   }
 
   Future<void> deleteCityData(CityInfo cityInfo) async {
     _weatherDeleteCityUseCase(cityInfo);
-    emit(state.copyWith(deleted: true));
+    emit(state.copyWith(deleted: true,fetchSavedData: false));
   }
-
+  Future<void> updateFetchData(bool fetched) async {
+    emit(state.copyWith(fetchSavedData: fetched));
+  }
   Future<void> getCitiesList() async {
     final AppEntity<List<CityOffline>> cityListData =
         await _weatherGetCitiesUseCase();
@@ -47,7 +49,7 @@ class WeatherForecastSaveCubit extends Cubit<WeatherForecastSaveState> {
   Future<void> getCityDetailInfo(String cityName) async {
     final AppEntity<ForecastModel> cityDetailData =
         await _weatherGetCityUseCase(cityName);
-    print("call Data ${cityName}");
+
     emit(state.copyWith(cityDetailAppEntity: cityDetailData));
   }
 
@@ -58,4 +60,8 @@ class WeatherForecastSaveCubit extends Cubit<WeatherForecastSaveState> {
   Future<void> setSelectedDayIndex(int dayIndex) async {
     emit(state.copyWith(saveSelectedDayIndex: dayIndex));
   }
+  Future<void> setSelectedCityId(int cityId) async {
+    emit(state.copyWith(saveSelectedCityId: cityId));
+  }
+
 }

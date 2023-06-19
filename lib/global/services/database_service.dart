@@ -204,6 +204,7 @@ class DatabaseService {
           feelslikeC: fetchCurrentData[cityIndex]['currentFeelTempC'],
           feelslikeF: fetchCurrentData[cityIndex]['currentFeelTempF']);
       cityOfflineList.add(CityOffline(
+          cityId: fetchCurrentData[cityIndex]['_id'],
           locationModel: locationModel, currentModel: currentModel));
     }
     return cityOfflineList;

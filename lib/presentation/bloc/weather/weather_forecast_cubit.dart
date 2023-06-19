@@ -21,10 +21,15 @@ class WeatherForecastCubit extends Cubit<WeatherForecastState> {
 
     emit(state.copyWith(
       appEntity: weatherData,
+      cityFound: false
     ));
   }
 
   Future<void> setSelectedIndex(int index) async {
     emit(state.copyWith(selectedIndex: index));
+  }
+
+  Future<void> setCityFound(bool cityFound) async {
+    emit(state.copyWith(cityFound: cityFound));
   }
 }

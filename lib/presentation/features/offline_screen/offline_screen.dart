@@ -12,8 +12,9 @@ class OfflineScreen extends StatelessWidget {
   final WeatherForecastSaveCubit _weatherForecastSaveCubit =
       injector.get<WeatherForecastSaveCubit>();
   Future<List<CityOffline>> fetchData() async {
-    if (_weatherForecastSaveCubit.state.cityListAppEntity == null) {
+    if (_weatherForecastSaveCubit.state.fetchSavedData == false) {
       _weatherForecastSaveCubit.getCitiesList();
+      _weatherForecastSaveCubit.updateFetchData(true);
     }
     return _weatherForecastSaveCubit.state.cityListAppEntity!.entity!;
   }
@@ -74,7 +75,7 @@ class OfflineScreen extends StatelessWidget {
                                       height: 20,
                                       child: CircularProgressIndicator()));
                             } else if (snapshot.hasError) {
-                              return Text('Error: ${snapshot.error}');
+                              return Text('Something Went Wrong');
                             } else if (snapshot.hasData) {
                               return ListView.builder(
                                   shrinkWrap: true,

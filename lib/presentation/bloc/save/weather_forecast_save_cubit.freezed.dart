@@ -22,6 +22,8 @@ mixin _$WeatherForecastSaveState {
       throw _privateConstructorUsedError;
   int? get saveSelectedDayIndex => throw _privateConstructorUsedError;
   int? get saveSelectedCityIndex => throw _privateConstructorUsedError;
+  bool? get fetchSavedData => throw _privateConstructorUsedError;
+  int? get saveSelectedCityId => throw _privateConstructorUsedError;
   bool? get saved => throw _privateConstructorUsedError;
   bool? get deleted => throw _privateConstructorUsedError;
 
@@ -41,6 +43,8 @@ abstract class $WeatherForecastSaveStateCopyWith<$Res> {
       AppEntity<ForecastModel>? cityDetailAppEntity,
       int? saveSelectedDayIndex,
       int? saveSelectedCityIndex,
+      bool? fetchSavedData,
+      int? saveSelectedCityId,
       bool? saved,
       bool? deleted});
 
@@ -66,6 +70,8 @@ class _$WeatherForecastSaveStateCopyWithImpl<$Res,
     Object? cityDetailAppEntity = freezed,
     Object? saveSelectedDayIndex = freezed,
     Object? saveSelectedCityIndex = freezed,
+    Object? fetchSavedData = freezed,
+    Object? saveSelectedCityId = freezed,
     Object? saved = freezed,
     Object? deleted = freezed,
   }) {
@@ -85,6 +91,14 @@ class _$WeatherForecastSaveStateCopyWithImpl<$Res,
       saveSelectedCityIndex: freezed == saveSelectedCityIndex
           ? _value.saveSelectedCityIndex
           : saveSelectedCityIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      fetchSavedData: freezed == fetchSavedData
+          ? _value.fetchSavedData
+          : fetchSavedData // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      saveSelectedCityId: freezed == saveSelectedCityId
+          ? _value.saveSelectedCityId
+          : saveSelectedCityId // ignore: cast_nullable_to_non_nullable
               as int?,
       saved: freezed == saved
           ? _value.saved
@@ -138,6 +152,8 @@ abstract class _$$_WeatherForecastSaveStateCopyWith<$Res>
       AppEntity<ForecastModel>? cityDetailAppEntity,
       int? saveSelectedDayIndex,
       int? saveSelectedCityIndex,
+      bool? fetchSavedData,
+      int? saveSelectedCityId,
       bool? saved,
       bool? deleted});
 
@@ -163,6 +179,8 @@ class __$$_WeatherForecastSaveStateCopyWithImpl<$Res>
     Object? cityDetailAppEntity = freezed,
     Object? saveSelectedDayIndex = freezed,
     Object? saveSelectedCityIndex = freezed,
+    Object? fetchSavedData = freezed,
+    Object? saveSelectedCityId = freezed,
     Object? saved = freezed,
     Object? deleted = freezed,
   }) {
@@ -182,6 +200,14 @@ class __$$_WeatherForecastSaveStateCopyWithImpl<$Res>
       saveSelectedCityIndex: freezed == saveSelectedCityIndex
           ? _value.saveSelectedCityIndex
           : saveSelectedCityIndex // ignore: cast_nullable_to_non_nullable
+              as int?,
+      fetchSavedData: freezed == fetchSavedData
+          ? _value.fetchSavedData
+          : fetchSavedData // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      saveSelectedCityId: freezed == saveSelectedCityId
+          ? _value.saveSelectedCityId
+          : saveSelectedCityId // ignore: cast_nullable_to_non_nullable
               as int?,
       saved: freezed == saved
           ? _value.saved
@@ -203,6 +229,8 @@ class _$_WeatherForecastSaveState implements _WeatherForecastSaveState {
       this.cityDetailAppEntity,
       this.saveSelectedDayIndex = 0,
       this.saveSelectedCityIndex = 0,
+      this.fetchSavedData = false,
+      this.saveSelectedCityId,
       this.saved,
       this.deleted});
 
@@ -217,13 +245,18 @@ class _$_WeatherForecastSaveState implements _WeatherForecastSaveState {
   @JsonKey()
   final int? saveSelectedCityIndex;
   @override
+  @JsonKey()
+  final bool? fetchSavedData;
+  @override
+  final int? saveSelectedCityId;
+  @override
   final bool? saved;
   @override
   final bool? deleted;
 
   @override
   String toString() {
-    return 'WeatherForecastSaveState(cityListAppEntity: $cityListAppEntity, cityDetailAppEntity: $cityDetailAppEntity, saveSelectedDayIndex: $saveSelectedDayIndex, saveSelectedCityIndex: $saveSelectedCityIndex, saved: $saved, deleted: $deleted)';
+    return 'WeatherForecastSaveState(cityListAppEntity: $cityListAppEntity, cityDetailAppEntity: $cityDetailAppEntity, saveSelectedDayIndex: $saveSelectedDayIndex, saveSelectedCityIndex: $saveSelectedCityIndex, fetchSavedData: $fetchSavedData, saveSelectedCityId: $saveSelectedCityId, saved: $saved, deleted: $deleted)';
   }
 
   @override
@@ -239,6 +272,10 @@ class _$_WeatherForecastSaveState implements _WeatherForecastSaveState {
                 other.saveSelectedDayIndex == saveSelectedDayIndex) &&
             (identical(other.saveSelectedCityIndex, saveSelectedCityIndex) ||
                 other.saveSelectedCityIndex == saveSelectedCityIndex) &&
+            (identical(other.fetchSavedData, fetchSavedData) ||
+                other.fetchSavedData == fetchSavedData) &&
+            (identical(other.saveSelectedCityId, saveSelectedCityId) ||
+                other.saveSelectedCityId == saveSelectedCityId) &&
             (identical(other.saved, saved) || other.saved == saved) &&
             (identical(other.deleted, deleted) || other.deleted == deleted));
   }
@@ -250,6 +287,8 @@ class _$_WeatherForecastSaveState implements _WeatherForecastSaveState {
       cityDetailAppEntity,
       saveSelectedDayIndex,
       saveSelectedCityIndex,
+      fetchSavedData,
+      saveSelectedCityId,
       saved,
       deleted);
 
@@ -267,6 +306,8 @@ abstract class _WeatherForecastSaveState implements WeatherForecastSaveState {
       final AppEntity<ForecastModel>? cityDetailAppEntity,
       final int? saveSelectedDayIndex,
       final int? saveSelectedCityIndex,
+      final bool? fetchSavedData,
+      final int? saveSelectedCityId,
       final bool? saved,
       final bool? deleted}) = _$_WeatherForecastSaveState;
 
@@ -278,6 +319,10 @@ abstract class _WeatherForecastSaveState implements WeatherForecastSaveState {
   int? get saveSelectedDayIndex;
   @override
   int? get saveSelectedCityIndex;
+  @override
+  bool? get fetchSavedData;
+  @override
+  int? get saveSelectedCityId;
   @override
   bool? get saved;
   @override
