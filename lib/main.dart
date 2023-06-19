@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:wealther_app/global/routes/app_routers.dart';
-import 'package:wealther_app/injection/injector.dart';
-import 'package:wealther_app/presentation/features/home_screen/home_screen.dart';
+import 'package:wealther_app/global/services/notification_service.dart';
+import 'package:wealther_app/injection/injector.dart'; 
+import 'package:firebase_core/firebase_core.dart';
 
+import 'firebase_options.dart';
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await initDependenciesInjection();
+  NotificationService.requestPermission();
+  NotificationService.getUserToken();
+  NotificationService.subscribeToTopic();
   runApp(const MyApp());
 }
 

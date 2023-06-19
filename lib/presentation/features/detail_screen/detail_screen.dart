@@ -65,7 +65,6 @@ class DetailScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
 
-
                             InkWell(
                                 onTap: () {
                                   context.pop();

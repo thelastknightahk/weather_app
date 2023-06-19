@@ -1,0 +1,171 @@
+{
+  "project_info": {
+    "project_number": "1080400165198",
+    "firebase_url": "https://videocall-65fc5.firebaseio.com",
+    "project_id": "videocall-65fc5",
+    "storage_bucket": "videocall-65fc5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080400165198:android:beef1f3494767328fd461f",
+        "android_client_info": {
+          "package_name": "com.example.notification_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080400165198-2eapc1294td7bfr4vtf3ki7qvq7pt9p1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD4q5Q9gB2OhIu1WhYFVpNPCX5xKCJAY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080400165198-2eapc1294td7bfr4vtf3ki7qvq7pt9p1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1080400165198-46n514aid3biuch6ahm4bgr1ihev2eqe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.notificationTest.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080400165198:android:3bbee722bbf01462fd461f",
+        "android_client_info": {
+          "package_name": "com.example.videocall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080400165198-fub7451h5oq9r5mabvvn5hn5l5vvbikv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.videocall",
+            "certificate_hash": "cbcf83192cf209438c1867b6f65a9e496fb1d7a0"
+          }
+        },
+        {
+          "client_id": "1080400165198-2eapc1294td7bfr4vtf3ki7qvq7pt9p1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD4q5Q9gB2OhIu1WhYFVpNPCX5xKCJAY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080400165198-2eapc1294td7bfr4vtf3ki7qvq7pt9p1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1080400165198-46n514aid3biuch6ahm4bgr1ihev2eqe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.notificationTest.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080400165198:android:c92a1359c63609c1fd461f",
+        "android_client_info": {
+          "package_name": "com.example.videochattest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080400165198-t6vt8cgjhglo7sncc20pp3n7qu0figoq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.videochattest",
+            "certificate_hash": "cbcf83192cf209438c1867b6f65a9e496fb1d7a0"
+          }
+        },
+        {
+          "client_id": "1080400165198-2eapc1294td7bfr4vtf3ki7qvq7pt9p1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD4q5Q9gB2OhIu1WhYFVpNPCX5xKCJAY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080400165198-2eapc1294td7bfr4vtf3ki7qvq7pt9p1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1080400165198-46n514aid3biuch6ahm4bgr1ihev2eqe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.notificationTest.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080400165198:android:2fd5260e7062a29cfd461f",
+        "android_client_info": {
+          "package_name": "com.example.wealther_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080400165198-2eapc1294td7bfr4vtf3ki7qvq7pt9p1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAD4q5Q9gB2OhIu1WhYFVpNPCX5xKCJAY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080400165198-2eapc1294td7bfr4vtf3ki7qvq7pt9p1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1080400165198-46n514aid3biuch6ahm4bgr1ihev2eqe.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.notificationTest.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
