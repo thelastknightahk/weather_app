@@ -1,9 +1,13 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:wealther_app/domain/entities/user/city_info.dart';
 import 'package:wealther_app/domain/entities/weather/current_model.dart';
 import 'package:wealther_app/domain/entities/weather/forcast_model.dart';
 import 'package:wealther_app/domain/entities/weather/location_model.dart';
+import 'package:wealther_app/domain/entities/weather/weather_model.dart';
 
+import '../../domain/entities/user/city_offline.dart';
+import '../../domain/entities/weather/condition_model.dart';
 import '../../domain/entities/weather/forecast_day.dart';
 import '../../domain/entities/weather/hour.dart';
 
@@ -54,7 +58,7 @@ class DatabaseService {
   static const hourConditionCode = 'hourConditionCode';
   static const hourWillItRain = 'hourWillItRain';
   static const hourChanceOfRain = 'hourChanceOfRain';
-
+  DatabaseService();
   DatabaseService._privateConstructor();
   static final DatabaseService instance = DatabaseService._privateConstructor();
 
@@ -115,11 +119,32 @@ class DatabaseService {
       ''');
   }
 
-  Future<int> insertCurrentWeatherData(
-      LocationModel locationModel, CurrentModel currentModel) async {
+  Future<void> insertCityData(WeatherModel weatherModel) async {
     Database? db = await instance.database;
+    LocationModel locationModel = weatherModel.location!;
+    CurrentModel currentModel = weatherModel.current!;
+    List<ForecastDay> forecastDays = weatherModel.forecast!.forecastday!;
+    for (var day = 0; day < forecastDays.length; day++) {
+      ForecastDay forecastDay = forecastDays[day];
+      for (var hour = 0; hour < forecastDay.hour!.length; hour++) {
+        Hour hourData = forecastDay.hour![hour];
+        await db!.insert(forecastTable, {
+          forecastCity: weatherModel.location!.name!,
+          forecastDate: forecastDay.date,
+          hourTime: hourData.time,
+          hourTempC: hourData.tempC,
+          hourTempF: hourData.tempF,
+          hourIsDay: hourData.isDay,
+          hourConditionText: hourData.condition!.text,
+          hourConditionIcon: hourData.condition!.icon,
+          hourConditionCode: hourData.condition!.code,
+          hourWillItRain: hourData.willItRain,
+          hourChanceOfRain: hourData.chanceOfRain
+        });
+      }
+    }
 
-    return await db!.insert(currentTable, {
+    await db!.insert(currentTable, {
       locationName: locationModel.name,
       locationRegion: locationModel.region,
       locationCountry: locationModel.country,
@@ -142,57 +167,88 @@ class DatabaseService {
     });
   }
 
-  Future<void> insertHourWeatherData(
-      String cityName, ForecastModel forecastModel) async {
+  Future<void> deleteData(CityInfo cityInfo) async {
     Database? db = await instance.database;
-    List<ForecastDay> forecastDays = forecastModel.forecastday!;
-    for (var day = 0; day < forecastDays.length; day++) {
-      ForecastDay forecastDay = forecastDays[day];
-      for (var hour = 0; hour < forecastDay.hour!.length; hour++) {
-        Hour hourData = forecastDay.hour![hour];
-        await db!.insert(forecastTable, {
-          forecastCity: cityName,
-          forecastDate: forecastDay.date,
-          hourTime: hourData.time,
-          hourTempC: hourData.tempC,
-          hourTempF: hourData.tempF,
-          hourIsDay: hourData.isDay,
-          hourConditionText: hourData.condition!.text,
-          hourConditionIcon: hourData.condition!.icon,
-          hourConditionCode: hourData.condition!.code,
-          hourWillItRain: hourData.willItRain,
-          hourChanceOfRain: hourData.chanceOfRain
-        });
+    db!
+      ..delete(currentTable,
+          where: '$columnId = ?', whereArgs: [cityInfo.cityId])
+      ..delete(forecastTable,
+          where: '$forecastCity = ?', whereArgs: [cityInfo.cityName]);
+  }
+
+  Future<List<CityOffline>> fetchCitiesData() async {
+    Database? db = await instance.database;
+    List<Map<String, dynamic>> fetchCurrentData = await db!.query(currentTable);
+    List<CityOffline> cityOfflineList = [];
+    for (var cityIndex = 0; cityIndex < fetchCurrentData.length; cityIndex++) {
+      LocationModel locationModel = LocationModel(
+          country: fetchCurrentData[cityIndex]['locationCountry'],
+          lat: fetchCurrentData[cityIndex]['locationLat'],
+          localtime: fetchCurrentData[cityIndex]['locationLocalTime'],
+          lon: fetchCurrentData[cityIndex]['locationLng'],
+          name: fetchCurrentData[cityIndex]['locationName'],
+          region: fetchCurrentData[cityIndex]['locationRegion'],
+          tzId: fetchCurrentData[cityIndex]['locationTzId']);
+      CurrentModel currentModel = CurrentModel(
+          tempC: fetchCurrentData[cityIndex]['currentTempC'],
+          tempF: fetchCurrentData[cityIndex]['currentTempF'],
+          isDay: fetchCurrentData[cityIndex]['currentIsDay'],
+          condition: ConditionModel(
+              code: fetchCurrentData[cityIndex]['currentConditionCode'],
+              icon: fetchCurrentData[cityIndex]['currentConditionIcon'],
+              text: fetchCurrentData[cityIndex]['currentConditionText']),
+          pressureMb: fetchCurrentData[cityIndex]['currentPressureMb'],
+          pressureIn: fetchCurrentData[cityIndex]['currentPressureIn'],
+          humidity: fetchCurrentData[cityIndex]['currentHumidity'],
+          cloud: fetchCurrentData[cityIndex]['currentCloud'],
+          feelslikeC: fetchCurrentData[cityIndex]['currentFeelTempC'],
+          feelslikeF: fetchCurrentData[cityIndex]['currentFeelTempF']);
+      cityOfflineList.add(CityOffline(
+          cityId: fetchCurrentData[cityIndex]['_id'],
+          locationModel: locationModel, currentModel: currentModel));
+    }
+    return cityOfflineList;
+  }
+
+  Future<ForecastModel> fetchForecastCityData(String cityName) async {
+    Database? db = await instance.database;
+    List<Map<String, dynamic>> fetchForecastCityData = await db!.query(
+        forecastTable,
+        where: '$forecastCity = ?',
+        whereArgs: [cityName]);
+    List<ForecastDay> forecastDayList = [];
+    List<Hour> hourList = [];
+
+    for (var hour = 0; hour < fetchForecastCityData.length; hour++) {
+      hourList.add(Hour(
+          time: fetchForecastCityData[hour]['hourTime'],
+          tempC: fetchForecastCityData[hour]['hourTempC'],
+          tempF: fetchForecastCityData[hour]['hourTempF'],
+          isDay: fetchForecastCityData[hour]['hourIsDay'],
+          condition: ConditionModel(
+              text: fetchForecastCityData[hour]['hourConditionText'],
+              icon: fetchForecastCityData[hour]['hourConditionIcon'],
+              code: fetchForecastCityData[hour]['hourConditionCode']),
+          willItRain: fetchForecastCityData[hour]['hourWillItRain'],
+          chanceOfRain: fetchForecastCityData[hour]['hourChanceOfRain']));
+    }
+
+    for (var day = 0; day < 3; day++) {
+      if (day == 0) {
+        forecastDayList.add(ForecastDay(
+            date: fetchForecastCityData[day]['forecastDate'],
+            hour: hourList.sublist(0, 24)));
+      } else if (day == 1) {
+        forecastDayList.add(ForecastDay(
+            date: fetchForecastCityData[day]['forecastDate'],
+            hour: hourList.sublist(24, 48)));
+      } else {
+        forecastDayList.add(ForecastDay(
+            date: fetchForecastCityData[day]['forecastDate'],
+            hour: hourList.sublist(48, 72)));
       }
     }
-  }
-
-  Future<List<Map<String, dynamic>>> fetchCurrentData() async {
-    Database? db = await instance.database;
-    return await db!.query(currentTable);
-  }
-
-  Future<List<Map<String, dynamic>>> fetchForecastData() async {
-    Database? db = await instance.database;
-    return await db!.query(forecastTable);
-  }
-
-  Future<List<Map<String, dynamic>>> fetchForecastCityData(
-      String forecastName) async {
-    Database? db = await instance.database;
-    return await db!.query(forecastTable,
-        where: '$forecastCity = ?', whereArgs: [forecastName]);
-  }
-
-  Future<int> deleteData(int id) async {
-    Database? db = await instance.database;
-    return await db!
-        .delete(currentTable, where: '$columnId = ?', whereArgs: [id]);
-  }
-
-  Future<int> deleteForecastData(String cityName) async {
-    Database? db = await instance.database;
-    return await db!.delete(forecastTable,
-        where: '$forecastCity = ?', whereArgs: [cityName]);
+    ForecastModel forecastModel = ForecastModel(forecastday: forecastDayList);
+    return forecastModel;
   }
 }

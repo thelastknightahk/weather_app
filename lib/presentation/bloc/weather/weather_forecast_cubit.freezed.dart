@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$WeatherForecastState {
   AppEntity<WeatherModel>? get appEntity => throw _privateConstructorUsedError;
+  bool? get cityFound => throw _privateConstructorUsedError;
   int? get selectedIndex => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,7 +31,10 @@ abstract class $WeatherForecastStateCopyWith<$Res> {
           $Res Function(WeatherForecastState) then) =
       _$WeatherForecastStateCopyWithImpl<$Res, WeatherForecastState>;
   @useResult
-  $Res call({AppEntity<WeatherModel>? appEntity, int? selectedIndex});
+  $Res call(
+      {AppEntity<WeatherModel>? appEntity,
+      bool? cityFound,
+      int? selectedIndex});
 
   $AppEntityCopyWith<WeatherModel, $Res>? get appEntity;
 }
@@ -50,6 +54,7 @@ class _$WeatherForecastStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? appEntity = freezed,
+    Object? cityFound = freezed,
     Object? selectedIndex = freezed,
   }) {
     return _then(_value.copyWith(
@@ -57,6 +62,10 @@ class _$WeatherForecastStateCopyWithImpl<$Res,
           ? _value.appEntity
           : appEntity // ignore: cast_nullable_to_non_nullable
               as AppEntity<WeatherModel>?,
+      cityFound: freezed == cityFound
+          ? _value.cityFound
+          : cityFound // ignore: cast_nullable_to_non_nullable
+              as bool?,
       selectedIndex: freezed == selectedIndex
           ? _value.selectedIndex
           : selectedIndex // ignore: cast_nullable_to_non_nullable
@@ -85,7 +94,10 @@ abstract class _$$_WeatherForecastStateCopyWith<$Res>
       __$$_WeatherForecastStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({AppEntity<WeatherModel>? appEntity, int? selectedIndex});
+  $Res call(
+      {AppEntity<WeatherModel>? appEntity,
+      bool? cityFound,
+      int? selectedIndex});
 
   @override
   $AppEntityCopyWith<WeatherModel, $Res>? get appEntity;
@@ -103,6 +115,7 @@ class __$$_WeatherForecastStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? appEntity = freezed,
+    Object? cityFound = freezed,
     Object? selectedIndex = freezed,
   }) {
     return _then(_$_WeatherForecastState(
@@ -110,6 +123,10 @@ class __$$_WeatherForecastStateCopyWithImpl<$Res>
           ? _value.appEntity
           : appEntity // ignore: cast_nullable_to_non_nullable
               as AppEntity<WeatherModel>?,
+      cityFound: freezed == cityFound
+          ? _value.cityFound
+          : cityFound // ignore: cast_nullable_to_non_nullable
+              as bool?,
       selectedIndex: freezed == selectedIndex
           ? _value.selectedIndex
           : selectedIndex // ignore: cast_nullable_to_non_nullable
@@ -121,17 +138,21 @@ class __$$_WeatherForecastStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_WeatherForecastState implements _WeatherForecastState {
-  _$_WeatherForecastState({this.appEntity, this.selectedIndex = 0});
+  _$_WeatherForecastState(
+      {this.appEntity, this.cityFound = false, this.selectedIndex = 0});
 
   @override
   final AppEntity<WeatherModel>? appEntity;
+  @override
+  @JsonKey()
+  final bool? cityFound;
   @override
   @JsonKey()
   final int? selectedIndex;
 
   @override
   String toString() {
-    return 'WeatherForecastState(appEntity: $appEntity, selectedIndex: $selectedIndex)';
+    return 'WeatherForecastState(appEntity: $appEntity, cityFound: $cityFound, selectedIndex: $selectedIndex)';
   }
 
   @override
@@ -141,12 +162,15 @@ class _$_WeatherForecastState implements _WeatherForecastState {
             other is _$_WeatherForecastState &&
             (identical(other.appEntity, appEntity) ||
                 other.appEntity == appEntity) &&
+            (identical(other.cityFound, cityFound) ||
+                other.cityFound == cityFound) &&
             (identical(other.selectedIndex, selectedIndex) ||
                 other.selectedIndex == selectedIndex));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, appEntity, selectedIndex);
+  int get hashCode =>
+      Object.hash(runtimeType, appEntity, cityFound, selectedIndex);
 
   @JsonKey(ignore: true)
   @override
@@ -159,10 +183,13 @@ class _$_WeatherForecastState implements _WeatherForecastState {
 abstract class _WeatherForecastState implements WeatherForecastState {
   factory _WeatherForecastState(
       {final AppEntity<WeatherModel>? appEntity,
+      final bool? cityFound,
       final int? selectedIndex}) = _$_WeatherForecastState;
 
   @override
   AppEntity<WeatherModel>? get appEntity;
+  @override
+  bool? get cityFound;
   @override
   int? get selectedIndex;
   @override

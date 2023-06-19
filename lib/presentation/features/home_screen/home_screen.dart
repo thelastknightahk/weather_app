@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:wealther_app/domain/entities/user/city_info.dart';
 import 'package:wealther_app/global/helper/function_helper.dart';
 import 'package:wealther_app/injection/injector.dart';
 import 'package:wealther_app/presentation/bloc/weather/weather_forecast_cubit.dart';
-import 'package:wealther_app/presentation/features/detail_screen/detail_screen.dart';
+import '../../../domain/entities/user/city_offline.dart';
 import '../../../global/global_exports.dart';
+import '../../bloc/save/weather_forecast_save_cubit.dart';
 
 class HomePageScreen extends StatelessWidget {
   HomePageScreen({super.key});
   final WeatherForecastCubit _weatherForecastCubit =
       injector.get<WeatherForecastCubit>();
+  final WeatherForecastSaveCubit _weatherForecastSaveCubit =
+  injector.get<WeatherForecastSaveCubit>();
   @override
   Widget build(BuildContext context) {
     var fullWidth = displayWidth(context);
@@ -20,6 +25,24 @@ class HomePageScreen extends StatelessWidget {
         listener: (BuildContext context, WeatherForecastState state) {
           if (state.appEntity != null) {
             FocusManager.instance.primaryFocus?.unfocus();
+            _weatherForecastSaveCubit.getCitiesList().then((value) {
+              List<CityOffline> cityDbList = _weatherForecastSaveCubit.state.cityListAppEntity!.entity!;
+
+
+              String cityNameToFind = _weatherForecastCubit.state.appEntity!.entity!.location!.name!.toString();
+
+              CityOffline? city = cityDbList.firstWhere(
+                    (city) => city.locationModel.name == cityNameToFind,
+              );
+
+              if (city != null) {
+                _weatherForecastCubit.setCityFound(true);
+                _weatherForecastSaveCubit.setSelectedCityId(city!.cityId!);
+              } else {
+
+              }
+
+            });
           }
         },
         builder: (BuildContext context, WeatherForecastState state) {
@@ -55,12 +78,7 @@ class HomePageScreen extends StatelessWidget {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const DetailScreen(),
-                                        ),
-                                      );
+                                      context.go('/offline');
                                     },
                                     child: Container(
                                         width: 40,
@@ -78,17 +96,23 @@ class HomePageScreen extends StatelessWidget {
                                   const SizedBox(
                                     width: 20,
                                   ),
-                                  Container(
-                                      width: 40,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                          color: Colors.white.withOpacity(0.7),
-                                          borderRadius:
-                                              BorderRadius.circular(4)),
-                                      child: Icon(
-                                        Icons.admin_panel_settings_sharp,
-                                        color: Colors.black.withOpacity(0.7),
-                                      )),
+                                  InkWell(
+                                    onTap: () {
+                                      context.go('/admin');
+                                    },
+                                    child: Container(
+                                        width: 40,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.7),
+                                            borderRadius:
+                                                BorderRadius.circular(4)),
+                                        child: Icon(
+                                          Icons.admin_panel_settings_sharp,
+                                          color: Colors.black.withOpacity(0.7),
+                                        )),
+                                  ),
                                 ],
                               ),
                             ],
@@ -138,8 +162,46 @@ class HomePageScreen extends StatelessWidget {
                                         ),
                                         state.appEntity == null
                                             ? Container()
-                                            : InkWell(
-                                                onTap: () async {},
+                                            : state.cityFound == true ?
+                                        InkWell(
+                                            onTap: () async {
+                                              if(_weatherForecastSaveCubit.state.saveSelectedCityId != null){
+                                                _weatherForecastSaveCubit.deleteCityData(CityInfo(
+                                                  cityName:state.appEntity!.entity!.location!.name ,
+                                                  cityId: _weatherForecastSaveCubit.state!.saveSelectedCityId!,
+                                                ) );
+                                                _weatherForecastCubit.setCityFound(false);
+                                              }
+                                              else{
+                                                List<CityOffline> cityDbList = _weatherForecastSaveCubit.state.cityListAppEntity!.entity!;
+
+
+                                                String cityNameToFind = _weatherForecastCubit.state.appEntity!.entity!.location!.name!.toString();
+
+                                                CityOffline? city = cityDbList.firstWhere(
+                                                      (city) => city.locationModel.name == cityNameToFind,
+                                                );
+                                                _weatherForecastSaveCubit.deleteCityData(CityInfo(
+                                                  cityName:state.appEntity!.entity!.location!.name ,
+                                                  cityId: city!.cityId,
+                                                ) );
+                                                _weatherForecastCubit.setCityFound(false);
+                                              }
+
+                                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                content: Text("Deleted ${state.appEntity!.entity!.location!.name }"),
+                                              ));
+                                            },
+                                            child: const Icon(
+                                                Icons.bookmark)):
+                                        InkWell(
+                                                onTap: () async {
+                                                  _weatherForecastSaveCubit.saveCityData(state.appEntity!.entity!);
+                                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                                    content: Text("Saved"),
+                                                  ));
+                                                  _weatherForecastCubit.setCityFound(true);
+                                                  },
                                                 child: const Icon(
                                                     Icons.bookmark_border)),
                                       ],
@@ -254,12 +316,8 @@ class HomePageScreen extends StatelessWidget {
                                             .forecast!
                                             .forecastday![state.selectedIndex!]
                                             .hour!;
-                                        return FunctionsHelper.hourDifference(
-                                                    "${hourData[index].time}") >=
-                                                0
-                                            ? weatherItemWidget(
-                                                context, hourData[index])
-                                            : Container();
+                                        return weatherItemWidget(
+                                            context, hourData[index]);
                                       }),
                                 ),
                               ],

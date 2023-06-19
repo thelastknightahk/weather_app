@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:intl/intl.dart';
+import 'package:wealther_app/domain/entities/user/city_offline.dart';
 import 'package:wealther_app/global/models/day_model.dart';
 
 class FunctionsHelper {
@@ -30,7 +31,7 @@ class FunctionsHelper {
 
   static int hourDifference(String hourData) {
     DateTime now = DateTime.now();
-
+    print("hOur ${now} ");
     DateTime dateTime = DateFormat('yyyy-MM-dd HH:mm').parse(hourData);
     Duration duration = dateTime.difference(now);
     int hourDifference = duration.inHours;
